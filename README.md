@@ -1,8 +1,36 @@
 # 🚀 Retail Market Basket Analysis and Association Rule Mining
 
-[![Jump to Project Overview](#project-overview)](#project-overview) | [![Jump to Business Impact](#business-impact)](#business-impact) | [![Jump to Tools Used](#tools-used)](#tools-used) | [![Jump to Insights](#insights-and-recommendations)](#insights-and-recommendations) | [![Jump to Results](#results-and-business-implications)](#results-and-business-implications) | [![Jump to Key Takeaways](#key-takeaways-for-data-science-practitioners)](#key-takeaways-for-data-science-practitioners) | [![Jump to Conclusion](#conclusion)](#conclusion)
-
-🔗 [Visit Repository](https://github.com/devarchanadev/Retail-Market-Basket-Analysis-and-Association-Rules-Mining) | 🔗 [Download Dataset](https://www.kaggle.com/datasets) 
+<p align="center">
+  <a href="#-project-overview">
+    <img src="https://img.shields.io/badge/-Project%20Overview-blue?style=for-the-badge" alt="Project Overview">
+  </a>
+  <a href="#-business-impact">
+    <img src="https://img.shields.io/badge/-Business%20Impact-green?style=for-the-badge" alt="Business Impact">
+  </a>
+  <a href="#-tools-used">
+    <img src="https://img.shields.io/badge/-Tools%20Used-orange?style=for-the-badge" alt="Tools Used">
+  </a>
+  <a href="#-insights-and-recommendations">
+    <img src="https://img.shields.io/badge/-Insights%20and%20Recommendations-red?style=for-the-badge" alt="Insights and Recommendations">
+  </a>
+  <a href="#-results-and-business-implications">
+    <img src="https://img.shields.io/badge/-Results%20and%20Business%20Implications-purple?style=for-the-badge" alt="Results and Business Implications">
+  </a>
+  <a href="#-key-takeaways-for-data-science-practitioners">
+    <img src="https://img.shields.io/badge/-Key%20Takeaways-yellow?style=for-the-badge" alt="Key Takeaways">
+  </a>
+  <a href="#-conclusion">
+    <img src="https://img.shields.io/badge/-Conclusion-pink?style=for-the-badge" alt="Conclusion">
+  </a>
+</p>
+<p align="center">
+  <a href="https://github.com/YourUsername/YourRepo" target="_blank">
+    <img src="https://img.shields.io/badge/-Visit%20Repository-blueviolet?style=for-the-badge" alt="Visit Repository">
+  </a>
+  <a href="https://www.kaggle.com/datasets" target="_blank">
+    <img src="https://img.shields.io/badge/-Download%20Dataset-orange?style=for-the-badge" alt="Download Dataset">
+  </a>
+</p>
 
 ## 🛒 Project Overview
 In this project, we leverage retail market basket analysis and association rule mining to gain insights into consumer purchasing patterns. The goal is to extract actionable recommendations that can enhance product bundling, promotions, and store layout strategies.
@@ -84,4 +112,17 @@ This project underscores the power of association rule mining in uncovering valu
 ---
 
 
-[![Jump to Top](#retail-market-basket-analysis-and-association-rule-mining)](#retail-market-basket-analysis-and-association-rule-mining)
+<p align="center">
+  <a href="https://github.com/YourUsername/YourRepo" target="_blank">
+    <img src="https://img.shields.io/badge/-Visit%20Repository-blueviolet?style=for-the-badge" alt="Visit Repository">
+  </a>
+  <a href="https://www.kaggle.com/datasets" target="_blank">
+    <img src="https://img.shields.io/badge/-Download%20Dataset-orange?style=for-the-badge" alt="Download Dataset">
+  </a>
+</p>
+
+<p align="center">
+  <a href="#-retail-market-basket-analysis-and-association-rule-mining">
+    <img src="https://img.shields.io/badge/-Jump%20to%20Top-lightblue?style=for-the-badge" alt="Jump to Top">
+  </a>
+</p>
