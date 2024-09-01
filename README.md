@@ -24,8 +24,8 @@
   </a>
 </p>
 
-  [![GitHub Repo](https://img.shields.io/badge/Visit-GitHub_Repo-181717?style=for-the-badge&logo=github)](https://github.com/devarchanadev/ypur-repo-name) 
-  [![Dataset Source](https://img.shields.io/badge/Download-Dataset_Source-20BEFF?style=for-the-badge&logo=kaggle)](https://www.kaggle.com/datasets/YourDatasetLink)
+  [![GitHub Repo](https://img.shields.io/badge/Visit-GitHub_Repo-181717?style=for-the-badge&logo=github)](https://github.com/devarchanadev/Retail-Market-Basket-Analysis-and-Association-Rules-Mining) 
+  [![Dataset Source](https://img.shields.io/badge/Download-Dataset_Source-20BEFF?style=for-the-badge&logo=kaggle)](https://www.kaggle.com)
 
 ## 🛒 Project Overview
 In this project, we leverage retail market basket analysis and association rule mining to gain insights into consumer purchasing patterns. The goal is to extract actionable recommendations that can enhance product bundling, promotions, and store layout strategies.
@@ -107,8 +107,8 @@ This project underscores the power of association rule mining in uncovering valu
 ---
 
 
-  [![GitHub Repo](https://img.shields.io/badge/Visit-GitHub_Repo-181717?style=for-the-badge&logo=github)](https://github.com/devarchanadev/ypur-repo-name) 
-  [![Dataset Source](https://img.shields.io/badge/Download-Dataset_Source-20BEFF?style=for-the-badge&logo=kaggle)](https://www.kaggle.com/datasets/YourDatasetLink)
+  [![GitHub Repo](https://img.shields.io/badge/Visit-GitHub_Repo-181717?style=for-the-badge&logo=github)](https://github.com/devarchanadev/Retail-Market-Basket-Analysis-and-Association-Rules-Mining) 
+  [![Dataset Source](https://img.shields.io/badge/Download-Dataset_Source-20BEFF?style=for-the-badge&logo=kaggle)](https://www.kaggle.com)
 
 <p align="center">
   <a href="#-retail-market-basket-analysis-and-association-rule-mining">
