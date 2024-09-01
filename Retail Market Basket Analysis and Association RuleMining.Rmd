@@ -1,0 +1,286 @@
+---
+title: "Retail Market Basket Analysis and Association Rule Mining"
+output: html_document
+date: "2023-12-15"
+---
+
+# PROJECT OVERVIEW:
+
+In this project we will understand how grocery items are picked up, how are they purchased, most and least picked items and combinations and will come up with suggestions.
+
+```{r}
+library("arules")
+
+#dats0 <- read.delim("groceries.csv", sep = ",", header = TRUE)
+dats <- read.transactions("groceries.csv", sep = ",")
+
+dats
+summary(dats)
+
+#Visualizing the item frequency plot for top 40 grocery items
+
+itemFrequencyPlot(dats, cex.names = 0.4, topN = 40)
+```
+#Here, is a visualization of the top 40 grocery items using item frequency plot and we see that the "whole milk' shows to be at the top while "berries" at the bottom and following it closely to the second last is the UHT-milk.
+
+
+
+#Now, lets rank some of the top rules with the highest “confidence” and "lift"
+
+```{r}
+my_params <- list(support = .005, confidence = .01, minlen = 2, maxlen = 6)
+my_rules <- apriori(dats, parameter = my_params)
+my_rules
+
+inspect(sort(my_rules, by = "confidence")[1:5])
+```
+
+
+
+```{r}
+inspect(sort(my_rules, by = "lift")[1:10])
+```
+
+
+# What we saw
+The top rule for confidence is the combination of "root vegetables," "tropical fruit," and "yogurt" leading to the purchase of "whole milk" with a confidence of 70%. This suggests that when customers buy these three items together, there is a high likelihood (70%) that they also purchase "whole milk."
+Next, significant rule includes "other vegetables," "pip fruit," and "root vegetables" leading to the purchase of "whole milk" with a confidence of 67%. This indicates a strong association between these items and the purchase of "whole milk."
+We can also see that rules involving combinations like "butter" and "whipped/sour cream" also show high confidence in leading to the purchase of "whole milk."
+
+
+The top rule for lift shows that the "ham" leading to the purchase of "white bread" with a lift of 4.64. This indicates that the purchase of "ham" is almost 4.64 times more likely when "white bread" is purchased compared to the expected frequency.
+Then there are Rules which shows combinations like "citrus fruit," "other vegetables," and "whole milk" leading to the purchase of "root vegetables" have high lift values, suggesting a strong association beyond what would be expected by chance.
+Rules with "herbs" and "root vegetables" or "berries" and "whipped/sour cream" also show high lift values, indicating notable associations.
+
+NOW COMING TO THE CONSISTENCIES
+1) Association with "Whole Milk": Both analyses consistently show a strong association with the purchase of "whole milk." This suggests that "whole milk" is a commonly occurring item in these association rules.
+
+DIFFERENCES
+Measures for Ranking:
+
+Confidence is used as the ranking measure, emphasizing the reliability of predicting the consequent based on the antecedent.
+Lift is used as the ranking measure, highlighting the strength of association beyond what would be expected by chance.
+
+Top Rules and Associated Items:
+
+Top rules shows combinations like "root vegetables," "tropical fruit," and "yogurt," indicating high confidence in predicting the purchase of "whole milk" when these items are present.
+Top rules shows items like "ham," "white bread," "citrus fruit," "herbs," "onions," "berries," and "whipped/sour cream," showing diverse patterns of unexpected and strong associations.
+
+Interpretation of Rules:
+
+B: Rules are interpreted in terms of confidence, focusing on the likelihood of purchasing "whole milk" given a specific combination of items.
+C: Rules are interpreted in terms of lift, emphasizing the strength of association beyond what is expected by chance.
+
+
+Now, lets check how can we come up with bundles.
+
+```{r}
+my_pastry_rules <- subset(my_rules, rhs %in% "pastry")
+pastry_rules <- sort(my_pastry_rules, by = "lift", decreasing = TRUE)
+
+# Displaying the top 5 rules
+top_pastry_rules <- inspect(pastry_rules[1:5])
+```
+Therefore, as per the rules above, we can suggest the below bundles:
+BUNDLES
+Bundle 1 :  soda, whole milk with pastry 
+Bundle 2 :  sausage, whole milk with pastry 
+Bundle 3 :  waffles with pastry 
+Bundle 4 :  pip fruit, whole milk with pastry
+Bundle 5 :  rolls/buns, yougurt with pastry
+
+Recommendations:
+
+Bundle 1: {soda, whole milk} with pastry
+Recommendation: Promote a "Beverage Bliss" combo featuring soda, whole milk, and a delicious pastry. This bundle exhibits a lift of 2.31, indicating that customers are 2.31 times more likely to purchase soda and whole milk together with pastries.
+
+Bundle 2: {sausage, whole milk} with pastry
+Recommendation: Introduce a "Flavorful Feast" combo showcasing sausage, whole milk, and a tempting pastry. This bundle demonstrates a lift of 2.14, signifying that customers have a 2.14 times higher chance of buying sausage and whole milk with pastries.
+
+Bundle 3: {waffles} with pastry
+Recommendation: Launch a "Waffle Oasis" combo featuring waffles and an assortment of pastries. The lift of 2.05 indicates that customers are 2.05 times more likely to purchase waffles along with pastries.
+
+Bundle 4: {pip fruit, whole milk} with pastry
+Recommendation: Introduce a "Fruit Symphony" combo incorporating pip fruit, whole milk, and a delectable pastry. This bundle has a lift of 1.90, suggesting that customers are 1.90 times more likely to buy pip fruit and whole milk with pastries.Emphasize the healthful addition of pip fruit, the richness of whole milk with pastries.
+
+Bundle 5: {rolls/buns, yogurt} with pastry
+Recommendation: Create a "Sweet Bakery Haven" combo featuring rolls/buns, yogurt, and a variety of pastries. The lift of 1.90 implies that customers have a 1.90 times higher likelihood of purchasing rolls/buns and yogurt with pastries.
+
+
+
+
+
+# Now lets understand customer behaviour and what items can we suggest to display depending on their behaviour
+```{r}
+library(readxl)
+library(arules)
+
+
+# Reading the data from the Excel file
+dats <- read_excel("marketbasket.xlsx", sheet = 1, col_names = TRUE, na = "none")
+
+
+dats[, 1:3] <- lapply(dats[, 1:3], as.factor)
+
+#Now, converting the matrix to a transactions object
+binarytransactions <- as(dats, "transactions")
+
+#Saving the transactions object as a tab-delimited text file
+write(binarytransactions, file = "binary_transaction_matrix.txt", sep = "\t")
+
+#Displaying the transactions object
+inspect(binarytransactions[1:17,])
+```
+
+
+
+
+#Answer: First, analysing it based on the transaction matrix these are the advice:
+
+#We see that, customers frequently purchase "Bread=white" and "Jelly=grape" together, suggesting potential for bundling or joint promotions to boost sales.
+
+#Also, "Bread=white" is often bought alone, indicating it may be considered a staple product. One advice is to understand the reasons behind standalone bread purchases could provide valuable insights.
+
+#There is a notable association between "Peanut Butter=creamy" and both "Bread=white" and "Jelly=grape." My advice is to use this information could be utilized for targeted promotions, such as discounts for purchasing all three items together.
+
+
+#Again, we can see that customers purchase different combinations of "Bread," "Jelly," and "Peanut Butter." Tailoring marketing strategies to accommodate these varied preferences could enhance overall customer satisfaction.
+
+#Another advice is to consider promoting complementary items; for example, suggest "Jelly=strawberry" when customers purchase "Bread=white" to encourage additional purchases.
+
+
+#Finally, instances where only one product, such as "Bread=wheat" alone, is purchased should be analyzed. Investigating the reasons behind single-item purchases can provide valuable insights into customer needs or preferences.
+
+
+
+#Now analyzing the data more with the below rules:
+```{r}
+#Checking frequent itemsets
+frequent_itemsets <- apriori(binarytransactions, parameter = list(support = 0.05, confidence = 0.5))
+
+inspect(frequent_itemsets)
+
+
+# Generating association rules
+rules <- apriori(binarytransactions, parameter = list(support = 0.05, confidence = 0.5))
+
+
+
+# Displaying association rules
+inspect(rules)
+
+top_rules <- head(sort(rules, by = "lift"), n = 5)
+inspect(top_rules)
+
+
+```
+BASED ON THE ABOVE OUTPUT SOME MORE OBSERVATIONS AND ADVICE
+
+OBSERVATIONS
+About 62.5% of customers made purchases, as indicated by the empty set ("{}") on the left-hand side. This set represents all customers and is associated with purchasing at least one product.
+37.66% of customers purchased bread ("{...1}").
+
+
+Association Rules Shows the following:
+
+Rule [2]: Customers who purchased peanut butter ({...3}) are likely to purchase jelly ({...2}) as well. The confidence is 60%, indicating a moderate association.
+Rule [3]: Customers who purchased peanut butter ({...3}) are likely to purchase bread ({...1}). The confidence is 83.03%, indicating a strong association.
+Rule [4]: Customers who purchased jelly ({...2}) are likely to purchase bread ({...1}). The confidence is 88.29%, indicating a strong association.
+
+Frequent Itemsets:
+
+The frequent itemsets reveal combinations of products that are frequently purchased together:
+{Peanut Butter, Jelly, Bread} with a support of 18.88%.
+
+ADVICE
+
+Products like peanut butter and jelly are frequently purchased together. Consider bundling or placing them in close proximity to encourage additional sales.
+
+INSIGHTS FOR BETTER PRICING - {Peanut Butter} => {Bread} - Support: 0.273, Confidence: 0.83, Lift: 1.33- This rule suggests a strong association between purchasing Peanut Butter and Bread together. Consider pricing strategies for these items, such as bundle discounts or joint promotions, as they are frequently purchased together.
+
+ITEMS FOR DISPLAY STRATEGIES:
+{Jelly, Peanut Butter} => {Bread} - Support: 0.188, Confidence: 0.95, Lift: 1.53 - Customers who buy Jelly and Peanut Butter together are highly likely to also buy Bread. Consider displaying these items together to potentially boost sales.
+
+
+BETTER UNDERSTANDING OF SALES:
+{Jelly} => {Bread} - Support: 0.376, Confidence: 0.88, Lift: 1.41- This rule indicates a strong association between purchasing Jelly and Bread together. Understanding such associations helps in managing inventory and planning sales strategies.
+
+
+POTENTIAL IMPACT OF DIFFERENT LEVELS OF COUPONS AND DISCOUNTS:
+{Bread, Peanut Butter} => {Jelly} Support: 0.188, Confidence: 0.69, Lift: 1.62 - Customers buying Bread and Peanut Butter together are likely to buy Jelly. Testing coupon discounts on Bread and Peanut Butter may impact Jelly sales positively. 
+This suggests opportunities for cross-promotions or displays.
+Given the strong association between peanut butter and jelly, offering discounts or promotions on these items together could be effective.
+
+
+# Introduction
+
+In this project, I explored retail market basket analysis and association rule mining within a grocery dataset. The primary objective was to understand consumer purchasing patterns, identify frequently bought items, and extract valuable insights that can inform product bundling, promotions, and store layout strategies. By leveraging association rule mining techniques, I aimed to uncover hidden relationships between products and provide actionable recommendations to enhance sales and customer satisfaction.
+
+
+# Data Preparation and Transaction Analysis
+
+I began by loading the dataset, which consisted of transaction data from a grocery store, into the R environment. The dataset was transformed into a "transactions" object, which is a suitable format for applying association rule mining techniques.
+
+After converting the data, I summarized it to understand the distribution of transactions and items within the dataset. This step allowed me to gain a preliminary understanding of the items' frequency and the overall structure of the data.
+
+
+# Visualization of Item Frequency
+
+To identify the most and least frequently purchased items, I generated an item frequency plot for the top 40 grocery items. This visualization revealed that "whole milk" was the most commonly purchased item, while "berries" and "UHT-milk" were among the least frequent. This insight highlighted the popularity of certain staple items and the potential need for targeted promotions for less frequently purchased products.
+
+
+# Association Rule Mining
+
+Ranking Rules by Confidence and Lift
+Next, I applied the Apriori algorithm to mine association rules from the transaction data. I focused on identifying the top rules based on two key metrics: confidence and lift.
+
+Confidence: This metric measures the likelihood of purchasing the consequent item given the antecedent items. I ranked the rules by confidence to identify the most reliable predictions.
+
+Lift: This metric indicates the strength of the association between items beyond what would be expected by chance. Rules with high lift values suggest strong and unexpected relationships between items.
+
+I examined the top rules for both confidence and lift. For example, a high-confidence rule showed that customers who purchased "root vegetables," "tropical fruit," and "yogurt" were likely to buy "whole milk" as well. On the other hand, a high-lift rule indicated that purchasing "ham" significantly increased the likelihood of buying "white bread."
+
+
+# Consistencies and Differences in the Rules
+
+I observed that "whole milk" consistently appeared in rules with high confidence, underscoring its importance in customer baskets. However, the top rules varied depending on whether they were ranked by confidence or lift. Confidence-focused rules emphasized the likelihood of buying "whole milk" with certain items, while lift-focused rules revealed more unexpected associations, such as between "ham" and "white bread."
+
+
+# Bundle Recommendations
+
+Based on the association rules, I identified potential product bundles that could be promoted to customers. I specifically focused on rules where "pastry" appeared as the consequent. The analysis led to the creation of several bundles, each supported by strong lift values:
+
+Bundle 1: Soda, whole milk, and pastry – Recommended as a "Beverage Bliss" combo.
+Bundle 2: Sausage, whole milk, and pastry – Suggested as a "Flavorful Feast" combo.
+Bundle 3: Waffles and pastry – Marketed as a "Waffle Oasis" combo.
+Bundle 4: Pip fruit, whole milk, and pastry – Proposed as a "Fruit Symphony" combo.
+Bundle 5: Rolls/buns, yogurt, and pastry – Suggested as a "Sweet Bakery Haven" combo.
+These bundles were designed to encourage additional sales by leveraging the strong associations between items.
+
+
+# Customer Behavior Analysis
+
+To further understand customer behavior, I analyzed another dataset in the form of a transaction matrix. This dataset allowed me to identify frequently purchased item combinations and customer purchasing patterns.
+
+
+# Observations
+
+Bread and Jelly: I found that customers often purchased "Bread=white" and "Jelly=grape" together, suggesting potential for bundling or joint promotions.
+Standalone Bread Purchases: The frequent standalone purchase of "Bread=white" indicated that it might be a staple product, warranting further investigation into customer motivations.
+Peanut Butter, Bread, and Jelly: There was a notable association between these items, with strong confidence values indicating that customers who bought peanut butter were also likely to purchase bread and jelly.
+Additional Analysis and Insights
+I conducted further analysis by generating additional association rules from the transaction matrix. These rules provided deeper insights into customer behavior:
+
+Frequent Itemsets: I identified frequent itemsets such as {Peanut Butter, Jelly, Bread}, which appeared in 18.88% of transactions.
+Strong Associations: Rules like {Peanut Butter} => {Bread} and {Jelly} => {Bread} showed high confidence, reinforcing the idea of bundling these items for promotional purposes.
+Recommendations
+Based on the insights gained from the analysis, I provided several recommendations:
+
+Product Bundling: I suggested bundling frequently purchased items like peanut butter and jelly to increase sales.
+Pricing Strategies: I recommended exploring joint promotions and discounts for items that showed strong associations, such as peanut butter and bread.
+Display Strategies: Items with strong associations, like peanut butter, jelly, and bread, should be displayed together to encourage cross-selling.
+
+
+# Conclusion
+
+Through this project, I was able to uncover valuable insights into customer purchasing behavior. By identifying strong associations between items, I was able to make data-driven recommendations for product bundling, pricing strategies, and store layout optimization. These findings can help retailers enhance customer satisfaction, increase sales, and improve overall business performance.
