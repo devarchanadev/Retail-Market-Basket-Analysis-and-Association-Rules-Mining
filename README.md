@@ -108,7 +108,7 @@ This project underscores the power of association rule mining in uncovering valu
 
 
   [![GitHub Repo](https://img.shields.io/badge/Visit-GitHub_Repo-181717?style=for-the-badge&logo=github)](https://github.com/devarchanadev/Retail-Market-Basket-Analysis-and-Association-Rules-Mining) 
-  [![Dataset Source](https://img.shields.io/badge/Download-Dataset_Source-20BEFF?style=for-the-badge&logo=kaggle)](https://www.kaggle.com)
+  [![Dataset Source](https://img.shields.io/badge/Download-Dataset_Source-20BEFF?style=for-the-badge&logo=kaggle)](https://www.kaggle.com) 
 
 <p align="center">
   <a href="#-retail-market-basket-analysis-and-association-rule-mining">
