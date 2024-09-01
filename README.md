@@ -23,14 +23,9 @@
     <img src="https://img.shields.io/badge/-Conclusion-pink?style=for-the-badge" alt="Conclusion">
   </a>
 </p>
-<p align="center">
-  <a href="https://github.com/YourUsername/YourRepo" target="_blank">
-    <img src="https://img.shields.io/badge/-Visit%20Repository-blueviolet?style=for-the-badge" alt="Visit Repository">
-  </a>
-  <a href="https://www.kaggle.com/datasets" target="_blank">
-    <img src="https://img.shields.io/badge/-Download%20Dataset-orange?style=for-the-badge" alt="Download Dataset">
-  </a>
-</p>
+
+  [![GitHub Repo](https://img.shields.io/badge/Visit-GitHub_Repo-181717?style=for-the-badge&logo=github)](https://github.com/devarchanadev/ypur-repo-name) 
+  [![Dataset Source](https://img.shields.io/badge/Download-Dataset_Source-20BEFF?style=for-the-badge&logo=kaggle)](https://www.kaggle.com/datasets/YourDatasetLink)
 
 ## 🛒 Project Overview
 In this project, we leverage retail market basket analysis and association rule mining to gain insights into consumer purchasing patterns. The goal is to extract actionable recommendations that can enhance product bundling, promotions, and store layout strategies.
@@ -112,14 +107,8 @@ This project underscores the power of association rule mining in uncovering valu
 ---
 
 
-<p align="center">
-  <a href="https://github.com/YourUsername/YourRepo" target="_blank">
-    <img src="https://img.shields.io/badge/-Visit%20Repository-blueviolet?style=for-the-badge" alt="Visit Repository">
-  </a>
-  <a href="https://www.kaggle.com/datasets" target="_blank">
-    <img src="https://img.shields.io/badge/-Download%20Dataset-orange?style=for-the-badge" alt="Download Dataset">
-  </a>
-</p>
+  [![GitHub Repo](https://img.shields.io/badge/Visit-GitHub_Repo-181717?style=for-the-badge&logo=github)](https://github.com/devarchanadev/ypur-repo-name) 
+  [![Dataset Source](https://img.shields.io/badge/Download-Dataset_Source-20BEFF?style=for-the-badge&logo=kaggle)](https://www.kaggle.com/datasets/YourDatasetLink)
 
 <p align="center">
   <a href="#-retail-market-basket-analysis-and-association-rule-mining">
